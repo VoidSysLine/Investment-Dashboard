@@ -182,9 +182,12 @@ function createStore() {
       .map((fav) => {
         const dataArray = state.data[fav.type] || [];
         const asset = dataArray.find((a) => {
-          // Match by symbol or id depending on type
+          // Match by symbol, id, or base depending on type
           if (fav.type === 'crypto') {
             return a.id === fav.id || a.symbol === fav.id;
+          }
+          if (fav.type === 'forex') {
+            return a.base === fav.id;
           }
           return a.symbol === fav.id;
         });
