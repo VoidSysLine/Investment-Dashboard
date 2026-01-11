@@ -13,19 +13,61 @@ export const CONFIG = {
  * Forex currency pairs
  */
 export const forex = [
-  { base: 'EUR', target: 'USD', name: 'Euro / US-Dollar', color: '#0052b4' },
-  { base: 'GBP', target: 'USD', name: 'Pfund / US-Dollar', color: '#c8102e' },
-  { base: 'JPY', target: 'USD', name: 'Yen / US-Dollar', color: '#bc002d', inverse: true },
-  { base: 'CHF', target: 'USD', name: 'Franken / US-Dollar', color: '#d52b1e' },
-  { base: 'CNY', target: 'USD', name: 'Yuan / US-Dollar', color: '#de2910', inverse: true },
-  { base: 'AUD', target: 'USD', name: 'AUD / US-Dollar', color: '#00008b' },
-  { base: 'CAD', target: 'USD', name: 'CAD / US-Dollar', color: '#ff0000' },
-  { base: 'SEK', target: 'USD', name: 'Schwedische Krone', color: '#006aa7' },
-  { base: 'NOK', target: 'USD', name: 'Norwegische Krone', color: '#ba0c2f' },
-  { base: 'PLN', target: 'USD', name: 'Polnischer Zloty', color: '#dc143c' },
-  { base: 'TRY', target: 'USD', name: 'Türkische Lira', color: '#e30a17' },
-  { base: 'INR', target: 'USD', name: 'Indische Rupie', color: '#ff9933' },
-  { base: 'BTC', target: 'USD', name: 'Bitcoin / US-Dollar', color: '#f7931a', crypto: true },
+  // Starke Weltwährungen
+  { base: 'EUR', target: 'USD', name: 'Euro', color: '#0052b4' },
+  { base: 'GBP', target: 'USD', name: 'Britisches Pfund', color: '#c8102e' },
+  { base: 'CHF', target: 'USD', name: 'Schweizer Franken', color: '#d52b1e' },
+
+  // Asien - Ostasien
+  { base: 'JPY', target: 'USD', name: 'Japanischer Yen', color: '#bc002d', inverse: true },
+  { base: 'CNY', target: 'USD', name: 'Chinesischer Yuan', color: '#de2910', inverse: true },
+  { base: 'HKD', target: 'USD', name: 'Hongkong-Dollar', color: '#de2910', inverse: true },
+  { base: 'KRW', target: 'USD', name: 'Südkoreanischer Won', color: '#003478', inverse: true },
+
+  // Asien - Südostasien
+  { base: 'SGD', target: 'USD', name: 'Singapur-Dollar', color: '#ef3340' },
+  { base: 'MYR', target: 'USD', name: 'Malaysischer Ringgit', color: '#010066', inverse: true },
+  { base: 'THB', target: 'USD', name: 'Thailändischer Baht', color: '#2d2a4a', inverse: true },
+  { base: 'IDR', target: 'USD', name: 'Indonesische Rupiah', color: '#ce1126', inverse: true },
+  { base: 'PHP', target: 'USD', name: 'Philippinischer Peso', color: '#0038a8', inverse: true },
+
+  // Asien - Südasien
+  { base: 'INR', target: 'USD', name: 'Indische Rupie', color: '#ff9933', inverse: true },
+  { base: 'PKR', target: 'USD', name: 'Pakistanische Rupie', color: '#01411c', inverse: true },
+
+  // Arabische / Naher Osten (Starke Währungen)
+  { base: 'KWD', target: 'USD', name: 'Kuwait-Dinar', color: '#007a3d' },
+  { base: 'BHD', target: 'USD', name: 'Bahrain-Dinar', color: '#ce1126' },
+  { base: 'OMR', target: 'USD', name: 'Omanischer Rial', color: '#db161b' },
+  { base: 'JOD', target: 'USD', name: 'Jordanischer Dinar', color: '#007a3d' },
+  { base: 'AED', target: 'USD', name: 'VAE-Dirham', color: '#00732f', inverse: true },
+  { base: 'SAR', target: 'USD', name: 'Saudi-Riyal', color: '#006c35', inverse: true },
+  { base: 'QAR', target: 'USD', name: 'Katar-Riyal', color: '#8d1b3d', inverse: true },
+  { base: 'EGP', target: 'USD', name: 'Ägyptisches Pfund', color: '#ce1126', inverse: true },
+  { base: 'ILS', target: 'USD', name: 'Israelischer Schekel', color: '#0038b8', inverse: true },
+
+  // Europa
+  { base: 'SEK', target: 'USD', name: 'Schwedische Krone', color: '#006aa7', inverse: true },
+  { base: 'NOK', target: 'USD', name: 'Norwegische Krone', color: '#ba0c2f', inverse: true },
+  { base: 'DKK', target: 'USD', name: 'Dänische Krone', color: '#c8102e', inverse: true },
+  { base: 'PLN', target: 'USD', name: 'Polnischer Zloty', color: '#dc143c', inverse: true },
+  { base: 'CZK', target: 'USD', name: 'Tschechische Krone', color: '#11457e', inverse: true },
+  { base: 'HUF', target: 'USD', name: 'Ungarischer Forint', color: '#436f4d', inverse: true },
+  { base: 'TRY', target: 'USD', name: 'Türkische Lira', color: '#e30a17', inverse: true },
+  { base: 'RUB', target: 'USD', name: 'Russischer Rubel', color: '#0039a6', inverse: true },
+
+  // Amerika
+  { base: 'CAD', target: 'USD', name: 'Kanadischer Dollar', color: '#ff0000' },
+  { base: 'MXN', target: 'USD', name: 'Mexikanischer Peso', color: '#006847', inverse: true },
+  { base: 'BRL', target: 'USD', name: 'Brasilianischer Real', color: '#009c3b', inverse: true },
+
+  // Ozeanien & Afrika
+  { base: 'AUD', target: 'USD', name: 'Australischer Dollar', color: '#00008b' },
+  { base: 'NZD', target: 'USD', name: 'Neuseeland-Dollar', color: '#00247d' },
+  { base: 'ZAR', target: 'USD', name: 'Südafrikanischer Rand', color: '#007a4d', inverse: true },
+
+  // Krypto
+  { base: 'BTC', target: 'USD', name: 'Bitcoin', color: '#f7931a', crypto: true },
 ];
 
 /**
@@ -142,18 +184,51 @@ export const basePrices = {
     COTTON: 0.72,
   },
   forex: {
+    // Starke Weltwährungen
     EUR: 1.08,
     GBP: 1.27,
-    JPY: 0.0067,
     CHF: 1.13,
+    // Ostasien
+    JPY: 0.0067,
     CNY: 0.14,
-    AUD: 0.65,
-    CAD: 0.74,
+    HKD: 0.128,
+    KRW: 0.00072,
+    // Südostasien
+    SGD: 0.74,
+    MYR: 0.22,
+    THB: 0.029,
+    IDR: 0.000063,
+    PHP: 0.018,
+    // Südasien
+    INR: 0.012,
+    PKR: 0.0036,
+    // Arabisch / Naher Osten
+    KWD: 3.26,
+    BHD: 2.65,
+    OMR: 2.60,
+    JOD: 1.41,
+    AED: 0.27,
+    SAR: 0.27,
+    QAR: 0.27,
+    EGP: 0.020,
+    ILS: 0.27,
+    // Europa
     SEK: 0.094,
     NOK: 0.089,
+    DKK: 0.145,
     PLN: 0.245,
+    CZK: 0.042,
+    HUF: 0.0027,
     TRY: 0.029,
-    INR: 0.012,
+    RUB: 0.010,
+    // Amerika
+    CAD: 0.74,
+    MXN: 0.050,
+    BRL: 0.17,
+    // Ozeanien & Afrika
+    AUD: 0.65,
+    NZD: 0.62,
+    ZAR: 0.055,
   },
 };
 

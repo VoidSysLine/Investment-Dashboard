@@ -40,11 +40,30 @@ function renderLayout() {
       ${createSection({ id: 'metals', title: 'Edelmetalle', icon: 'cube', color: 'violet', apiLabel: 'Live via Metals.dev', gridId: 'metalsGrid' })}
       ${createSection({ id: 'softCommodities', title: 'Agrarrohstoffe', icon: 'globe', color: 'lime', apiLabel: 'Soft Commodities', gridId: 'softCommoditiesGrid' })}
     </main>
-    <footer class="border-t border-white/5 py-6 mt-auto">
+    <footer class="border-t border-white/5 py-8 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <p>Datenquellen: CoinGecko, Finnhub, Frankfurter API</p>
-          <p>Kurse dienen nur zur Information — keine Anlageberatung</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div>
+            <h4 class="text-sm font-semibold text-white mb-2">Finance Hub</h4>
+            <p class="text-xs text-gray-500">Live Market Dashboard für Echtzeit-Finanzdaten. Krypto, Aktien, ETFs, Forex und Rohstoffe auf einen Blick.</p>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-white mb-2">Datenquellen</h4>
+            <ul class="text-xs text-gray-500 space-y-1">
+              <li>• CoinGecko — Kryptowährungen</li>
+              <li>• Finnhub — Aktien & ETFs</li>
+              <li>• Frankfurter API — Forex</li>
+              <li>• Metals.dev — Edelmetalle</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-white mb-2">Hinweis</h4>
+            <p class="text-xs text-gray-500">Alle Kurse dienen nur zur Information und stellen keine Anlageberatung dar. Verzögerungen möglich.</p>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-600">
+          <p>&copy; ${new Date().getFullYear()} Finance Hub</p>
+          <p>Daten werden alle 60 Sekunden aktualisiert</p>
         </div>
       </div>
     </footer>
