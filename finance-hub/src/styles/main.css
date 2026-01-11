@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Custom Properties for theming */
+:root {
+  --surface-900: #0a0a0f;
+  --surface-800: #12121a;
+  --surface-700: #1a1a24;
+  --surface-600: #24242f;
+  --bg-color: #0a0a0f;
+
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  --accent-rose: #f43f5e;
+  --accent-amber: #f59e0b;
+  --accent-violet: #8b5cf6;
+  --accent-lime: #84cc16;
+  --accent-sky: #0ea5e9;
+}
+
+/* Base styles */
+* {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+  background: var(--bg-color);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(6, 182, 212, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139, 92, 246, 0.05), transparent);
+  min-height: 100vh;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glass Card */
+.glass-card {
+  background: linear-gradient(135deg, rgba(26, 26, 36, 0.8) 0%, rgba(18, 18, 26, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Price indicators */
+.price-up {
+  color: #10b981;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.price-down {
+  color: #f43f5e;
+  text-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
+}
+
+/* Loading skeleton */
+.loading-skeleton {
+  background: linear-gradient(90deg, #1a1a24 25%, #24242f 50%, #1a1a24 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 50%, transparent);
+}
+
+/* Countdown ring */
+.countdown-ring {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Asset icon */
+.asset-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Refresh button animation */
+.refresh-btn {
+  transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+  transform: rotate(180deg);
+}
+
+.refresh-btn:active {
+  transform: rotate(360deg) scale(0.9);
+}
+
+/* Fade in animation */
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* Currency Toggle Switch */
+.currency-toggle {
+  position: relative;
+  width: 100px;
+  height: 36px;
+  background: var(--surface-700);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.currency-toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 46px;
+  height: 28px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  border-radius: 14px;
+  transition: transform 0.3s ease;
+}
+
+.currency-toggle.eur .currency-toggle-slider {
+  transform: translateX(46px);
+}
+
+.currency-toggle-labels {
+  position: relative;
+  display: flex;
+  height: 100%;
+  z-index: 1;
+}
+
+.currency-toggle-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.currency-toggle .currency-toggle-label.usd {
+  color: white;
+}
+
+.currency-toggle .currency-toggle-label.eur {
+  color: #6b7280;
+}
+
+.currency-toggle.eur .currency-toggle-label.usd {
+  color: #6b7280;
+}
+
+.currency-toggle.eur .currency-toggle-label.eur {
+  color: white;
+}
+
+/* Forex card */
+.forex-card .price-display {
+  font-size: 1.5rem;
+}
+
+/* Section collapse animation */
+.section-content {
+  transition: all 0.3s ease;
+}
+
+.section-content.hidden {
+  display: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-800);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-600);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2f2f3a;
+}
+
+/* Favorite button */
+.favorite-btn {
+  transition: all 0.2s ease;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+}
+
+.favorite-btn:active {
+  transform: scale(0.95);
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Finance Hub",
+  "short_name": "Finance Hub",
+  "description": "Live Market Dashboard - Krypto, Aktien, ETFs, Forex und Rohstoffe",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#06b6d4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business"],
+  "lang": "de"
+}
