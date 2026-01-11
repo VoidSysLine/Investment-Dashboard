@@ -171,6 +171,9 @@ export function applyTheme() {
   const state = store.getState();
   const theme = themes[state.theme] || themes.dark;
 
+  // Set data-theme attribute for CSS selectors
+  document.documentElement.setAttribute('data-theme', state.theme);
+
   document.documentElement.style.setProperty('--surface-900', theme.surface900);
   document.documentElement.style.setProperty('--surface-800', theme.surface800);
   document.documentElement.style.setProperty('--surface-700', theme.surface700);

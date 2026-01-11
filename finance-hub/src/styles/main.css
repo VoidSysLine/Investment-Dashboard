@@ -349,3 +349,154 @@ body {
 [data-theme="light"] input[type="text"]::placeholder {
   color: var(--text-secondary);
 }
+
+/* ============================================
+   LIGHT MODE - Comprehensive Overrides
+   ============================================ */
+
+/* Background colors - using Tailwind class names */
+[data-theme="light"] .bg-surface-900\/80,
+[data-theme="light"] .bg-surface-900 {
+  background-color: var(--surface-900) !important;
+}
+
+[data-theme="light"] .bg-surface-800\/50,
+[data-theme="light"] .bg-surface-800 {
+  background-color: var(--surface-800) !important;
+}
+
+[data-theme="light"] .bg-surface-700 {
+  background-color: var(--surface-700) !important;
+}
+
+[data-theme="light"] .bg-surface-600 {
+  background-color: var(--surface-600) !important;
+}
+
+/* Border colors */
+[data-theme="light"] .border-white\/5,
+[data-theme="light"] .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Text colors - headings */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4 {
+  color: var(--text-primary) !important;
+}
+
+/* Text colors - Tailwind classes */
+[data-theme="light"] .text-white {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .text-gray-400,
+[data-theme="light"] .text-gray-500,
+[data-theme="light"] .text-gray-600 {
+  color: var(--text-secondary) !important;
+}
+
+/* Hover states */
+[data-theme="light"] .hover\:bg-surface-600:hover {
+  background-color: var(--surface-600) !important;
+}
+
+[data-theme="light"] .hover\:text-white:hover {
+  color: var(--text-primary) !important;
+}
+
+/* Header specific */
+[data-theme="light"] header {
+  background: rgba(248, 250, 252, 0.95) !important;
+  backdrop-filter: blur(20px);
+}
+
+/* Market summary bar */
+[data-theme="light"] #marketSummary {
+  background: var(--card-bg) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Section headers and titles */
+[data-theme="light"] .section-header,
+[data-theme="light"] [class*="font-semibold"] {
+  color: var(--text-primary);
+}
+
+/* Asset cards - prices and text */
+[data-theme="light"] .glass-card h3,
+[data-theme="light"] .glass-card .font-semibold,
+[data-theme="light"] .glass-card .text-2xl,
+[data-theme="light"] .glass-card .text-xl,
+[data-theme="light"] .glass-card .price-display {
+  color: var(--text-primary) !important;
+}
+
+/* Mini chart container */
+[data-theme="light"] .bg-surface-800\/50 {
+  background-color: rgba(241, 245, 249, 0.5) !important;
+}
+
+/* Footer */
+[data-theme="light"] footer {
+  background-color: var(--surface-900);
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] footer h4 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] footer p,
+[data-theme="light"] footer li {
+  color: var(--text-secondary) !important;
+}
+
+/* Buttons and interactive elements */
+[data-theme="light"] button {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .refresh-btn,
+[data-theme="light"] #themeToggle {
+  background-color: var(--surface-700) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .refresh-btn:hover,
+[data-theme="light"] #themeToggle:hover {
+  background-color: var(--surface-600) !important;
+}
+
+[data-theme="light"] .refresh-btn svg,
+[data-theme="light"] #themeToggle svg {
+  color: var(--text-secondary) !important;
+}
+
+/* Exchange rate display */
+[data-theme="light"] .bg-surface-700 {
+  background-color: var(--surface-700) !important;
+}
+
+/* Sort buttons */
+[data-theme="light"] select {
+  background-color: var(--surface-700) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Section collapse buttons */
+[data-theme="light"] .collapse-btn svg {
+  color: var(--text-secondary) !important;
+}
+
+/* Scrollbar for light mode */
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--surface-700);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--surface-600);
+}
