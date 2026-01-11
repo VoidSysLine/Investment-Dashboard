@@ -131,7 +131,13 @@ function updateWatchlist() {
     </p>`;
     section?.classList.add('hidden');
   } else {
-    grid.innerHTML = favorites.map((asset, i) => createAssetCard(asset, asset.assetType, i)).join('');
+    grid.innerHTML = favorites.map((asset, i) => {
+      // Use ForexCard for forex favorites
+      if (asset.assetType === 'forex') {
+        return createForexCard(asset, i);
+      }
+      return createAssetCard(asset, asset.assetType, i);
+    }).join('');
     section?.classList.remove('hidden');
 
     // Re-add favorite button listeners

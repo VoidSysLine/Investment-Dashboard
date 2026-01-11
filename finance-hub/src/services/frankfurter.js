@@ -2,6 +2,9 @@
  * Frankfurter API Service
  * Free forex/currency exchange rates - no API key required
  * https://api.frankfurter.app/
+ *
+ * Note: Frankfurter API only supports ~30 major currencies.
+ * For unsupported currencies, we use fallback basePrices.
  */
 
 import { fetchJSON } from './api.js';
@@ -10,6 +13,25 @@ import { forex, basePrices } from '../config/assets.js';
 import { logger } from '../utils/logger.js';
 
 const BASE_URL = API_ENDPOINTS.FRANKFURTER;
+
+/**
+ * Currencies supported by Frankfurter API
+ */
+const SUPPORTED_CURRENCIES = [
+  'EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AUD', 'CAD', 'CNY', 'HKD', 'NZD',
+  'SEK', 'NOK', 'DKK', 'SGD', 'KRW', 'TRY', 'INR', 'MXN', 'ZAR', 'BRL',
+  'PLN', 'THB', 'IDR', 'HUF', 'CZK', 'ILS', 'PHP', 'MYR', 'RON', 'BGN',
+  'ISK', 'HRK'
+];
+
+/**
+ * Check if currency is supported by Frankfurter API
+ * @param {string} currency - Currency code
+ * @returns {boolean}
+ */
+function isSupported(currency) {
+  return SUPPORTED_CURRENCIES.includes(currency);
+}
 
 /**
  * Fetch current USD to EUR exchange rate
@@ -63,17 +85,37 @@ export async function fetchForexData() {
         };
       }
 
+      // Check if currency is supported by API
+      const currencySupported = isSupported(pair.base);
       let rate;
-      if (pair.base === 'USD') {
-        rate = rates[pair.target] || 0;
-      } else if (pair.target === 'USD') {
-        rate = 1 / (rates[pair.base] || 1);
-      } else {
-        rate = rates[pair.base] || 0;
-      }
+      let simulated = false;
 
-      if (pair.inverse) {
-        rate = 1 / rate;
+      if (currencySupported && rates[pair.base]) {
+        // Use live API data
+        if (pair.base === 'USD') {
+          rate = rates[pair.target] || 0;
+        } else if (pair.target === 'USD') {
+          rate = 1 / rates[pair.base];
+        } else {
+          rate = rates[pair.base] || 0;
+        }
+
+        if (pair.inverse) {
+          rate = 1 / rate;
+        }
+      } else {
+        // Use fallback basePrices for unsupported currencies
+        const baseRate = basePrices.forex[pair.base];
+        if (baseRate) {
+          rate = baseRate;
+          // Add small variance for realism
+          const variance = (Math.random() - 0.5) * baseRate * 0.01;
+          rate = baseRate + variance;
+          simulated = true;
+        } else {
+          rate = 1;
+          simulated = true;
+        }
       }
 
       // Simulate 24h change (Frankfurter doesn't provide this)
@@ -84,6 +126,7 @@ export async function fetchForexData() {
         rate,
         change24h: change,
         loaded: true,
+        simulated,
       };
     });
   } catch (error) {
