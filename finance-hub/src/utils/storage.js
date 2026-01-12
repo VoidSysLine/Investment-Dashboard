@@ -82,6 +82,7 @@ export const STORAGE_KEYS = {
   CURRENCY: 'currency',
   COLLAPSED_SECTIONS: 'collapsedSections',
   SORT_PREFERENCE: 'sortPreference',
+  ACTIVE_TAB: 'activeTab',
 };
 
 /**
@@ -207,4 +208,21 @@ export function getSortPreference() {
  */
 export function setSortPreference(field, direction) {
   return set(STORAGE_KEYS.SORT_PREFERENCE, { field, direction });
+}
+
+/**
+ * Get active tab
+ * @returns {string}
+ */
+export function getActiveTab() {
+  return get(STORAGE_KEYS.ACTIVE_TAB, 'all');
+}
+
+/**
+ * Set active tab
+ * @param {string} tabId - Tab identifier
+ * @returns {boolean}
+ */
+export function setActiveTab(tabId) {
+  return set(STORAGE_KEYS.ACTIVE_TAB, tabId);
 }

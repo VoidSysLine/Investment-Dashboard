@@ -18,9 +18,15 @@ import { fetchMetalsData, fetchSoftCommoditiesData } from './services/metals.js'
 
 // Components
 import { createHeader, updateHeaderDisplay, initHeaderEvents, applyTheme } from './components/Header.js';
-import { createSection, createWatchlistSection, createMarketSummary, initSectionEvents } from './components/Section.js';
+import { createSection, createWatchlistSection, createMarketSummary, initSectionEvents, createTabNavigation, TABS } from './components/Section.js';
 import { createAssetCard, createLoadingCard } from './components/AssetCard.js';
 import { createForexCard, createForexLoadingCard } from './components/ForexCard.js';
+
+// Storage for active tab
+import * as storage from './utils/storage.js';
+
+// Current active tab
+let activeTab = storage.getActiveTab();
 
 /**
  * Render main layout
@@ -32,13 +38,16 @@ function renderLayout() {
     ${createHeader()}
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       ${createMarketSummary()}
-      ${createWatchlistSection()}
-      ${createSection({ id: 'forex', title: 'Währungen', icon: 'currency', color: 'sky', apiLabel: 'Live via Frankfurter API', gridId: 'forexGrid', gridCols: 'lg:grid-cols-4' })}
-      ${createSection({ id: 'crypto', title: 'Kryptowährungen', icon: 'crypto', color: 'amber', apiLabel: 'Live via CoinGecko', gridId: 'cryptoGrid' })}
-      ${createSection({ id: 'stocks', title: 'Aktien', icon: 'chart', color: 'cyan', apiLabel: 'Live via Finnhub', gridId: 'stocksGrid' })}
-      ${createSection({ id: 'etfs', title: 'ETFs', icon: 'layers', color: 'emerald', apiLabel: 'Live via Finnhub', gridId: 'etfsGrid' })}
-      ${createSection({ id: 'metals', title: 'Edelmetalle', icon: 'cube', color: 'violet', apiLabel: 'Live via Metals.dev', gridId: 'metalsGrid' })}
-      ${createSection({ id: 'softCommodities', title: 'Agrarrohstoffe', icon: 'globe', color: 'lime', apiLabel: 'Soft Commodities', gridId: 'softCommoditiesGrid' })}
+      ${createTabNavigation(activeTab)}
+      <div id="sectionsContainer">
+        ${createWatchlistSection()}
+        ${createSection({ id: 'forex', title: 'Währungen', icon: 'currency', color: 'sky', apiLabel: 'Live via Frankfurter API', gridId: 'forexGrid', gridCols: 'lg:grid-cols-4' })}
+        ${createSection({ id: 'crypto', title: 'Kryptowährungen', icon: 'crypto', color: 'amber', apiLabel: 'Live via CoinGecko', gridId: 'cryptoGrid' })}
+        ${createSection({ id: 'stocks', title: 'Aktien', icon: 'chart', color: 'cyan', apiLabel: 'Live via Finnhub', gridId: 'stocksGrid' })}
+        ${createSection({ id: 'etfs', title: 'ETFs', icon: 'layers', color: 'emerald', apiLabel: 'Live via Finnhub', gridId: 'etfsGrid' })}
+        ${createSection({ id: 'metals', title: 'Edelmetalle', icon: 'cube', color: 'violet', apiLabel: 'Live via Metals.dev', gridId: 'metalsGrid' })}
+        ${createSection({ id: 'softCommodities', title: 'Agrarrohstoffe', icon: 'globe', color: 'lime', apiLabel: 'Soft Commodities', gridId: 'softCommoditiesGrid' })}
+      </div>
     </main>
     <footer class="border-t border-white/5 py-8 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -155,6 +164,90 @@ function updateWatchlist() {
   if (count) {
     count.textContent = `${favorites.length} Favorit${favorites.length !== 1 ? 'en' : ''}`;
   }
+}
+
+/**
+ * Update section visibility based on active tab
+ */
+function updateSectionVisibility() {
+  const sections = {
+    watchlist: document.querySelector('[data-section="watchlist"]'),
+    forex: document.querySelector('[data-section="forex"]'),
+    crypto: document.querySelector('[data-section="crypto"]'),
+    stocks: document.querySelector('[data-section="stocks"]'),
+    etfs: document.querySelector('[data-section="etfs"]'),
+    metals: document.querySelector('[data-section="metals"]'),
+    softCommodities: document.querySelector('[data-section="softCommodities"]'),
+  };
+
+  // Also get the dividers after each section
+  const dividers = document.querySelectorAll('.section-divider');
+
+  // Define which sections are visible for each tab
+  const tabSections = {
+    all: ['watchlist', 'forex', 'crypto', 'stocks', 'etfs', 'metals', 'softCommodities'],
+    watchlist: ['watchlist'],
+    forex: ['forex'],
+    crypto: ['crypto'],
+    stocks: ['stocks'],
+    etfs: ['etfs'],
+    commodities: ['metals', 'softCommodities'],
+  };
+
+  const visibleSections = tabSections[activeTab] || tabSections.all;
+
+  // Show/hide sections
+  Object.entries(sections).forEach(([id, section]) => {
+    if (section) {
+      const shouldShow = visibleSections.includes(id);
+      section.style.display = shouldShow ? '' : 'none';
+      // Also hide the following divider
+      const nextDivider = section.nextElementSibling;
+      if (nextDivider && nextDivider.classList.contains('section-divider')) {
+        nextDivider.style.display = shouldShow ? '' : 'none';
+      }
+    }
+  });
+
+  // Special handling for watchlist - show it if has favorites, or if on watchlist tab
+  const watchlistSection = sections.watchlist;
+  if (watchlistSection && activeTab === 'watchlist') {
+    watchlistSection.style.display = '';
+    watchlistSection.classList.remove('hidden');
+  }
+}
+
+/**
+ * Switch to a different tab
+ * @param {string} tabId - Tab ID to switch to
+ */
+function switchTab(tabId) {
+  activeTab = tabId;
+  storage.setActiveTab(tabId);
+
+  // Update tab button styles
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    const isActive = btn.dataset.tab === tabId;
+    btn.className = `tab-btn px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 flex items-center gap-2 whitespace-nowrap ${
+      isActive
+        ? 'bg-gradient-to-r from-accent-cyan to-accent-violet text-white shadow-lg shadow-accent-cyan/25'
+        : 'bg-surface-700 text-gray-400 hover:bg-surface-600 hover:text-white border border-white/5'
+    }`;
+  });
+
+  // Update section visibility
+  updateSectionVisibility();
+}
+
+/**
+ * Initialize tab event listeners
+ */
+function initTabEvents() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchTab(btn.dataset.tab);
+    });
+  });
 }
 
 /**
@@ -330,6 +423,10 @@ function init() {
   // Initialize event listeners
   initHeaderEvents(refreshAllData);
   initSectionEvents();
+  initTabEvents();
+
+  // Apply initial tab visibility
+  updateSectionVisibility();
 
   // Listen for search/sort updates
   document.addEventListener('search-updated', () => {

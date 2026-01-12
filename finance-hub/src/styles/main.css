@@ -500,3 +500,42 @@ body {
 [data-theme="light"] ::-webkit-scrollbar-thumb {
   background: var(--surface-600);
 }
+
+/* ============================================
+   TAB NAVIGATION
+   ============================================ */
+
+/* Hide scrollbar for tab navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tab buttons */
+.tab-btn {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tab-btn:active {
+  transform: scale(0.98);
+}
+
+/* Light mode tab styles */
+[data-theme="light"] .tab-btn {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .tab-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--surface-600) !important;
+}
+
+[data-theme="light"] .tab-btn.active,
+[data-theme="light"] .tab-btn[class*="from-accent-cyan"] {
+  color: white !important;
+}
